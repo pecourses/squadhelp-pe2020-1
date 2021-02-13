@@ -33,13 +33,16 @@ export const getCustomersContests = (data) => {
 
 // http://host:port/api/contests
 export const getActiveContests = ({offset, limit, typeIndex, contestId, industry, awardSort, ownEntries}) => {
-    return http.post('/contests', {offset, limit, typeIndex, contestId, industry, awardSort, ownEntries})
+    return http.get('/contests', {offset, limit, typeIndex, contestId, industry, awardSort, ownEntries})
 };
 
-export const getContestById = (data) => {
-    return http.get('getContestById', {
+//
+//export const getContestById = (data) => {
+export const getContestById = ({contestId}) => {
+    return http.get(`/contests/:${contestId}`, {
         headers: {
             contestId: data.contestId
         }
     });
 };
+// view - actionCreator(action) -> rootSaga -> itemSaga -> api

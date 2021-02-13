@@ -31,26 +31,8 @@ router.post(
 );
 
 // contestRouter
-router.use('/contests', contestRouter);
-
 // /api/contests
-
-// router.get(
-//   '/getContestById',
-contestRouter.get(
-  '/:contestId',
-  checkToken.checkToken,
-  basicMiddlewares.canGetContest,
-  contestController.getContestById,
-);
-// router.post(
-//   '/updateContest',
-contestRouter.put(
-  '/:contestId',
-  checkToken.checkToken,
-  upload.updateContestFile,
-  contestController.updateContest,
-);
+router.use('/contests', contestRouter);
 
 router.post(
   '/dataForContest',

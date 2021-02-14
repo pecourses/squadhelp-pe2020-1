@@ -1,17 +1,20 @@
 const { Router } = require('express');
-const basicMiddlewares = require('./middlewares/basicMiddlewares');
-const contestController = require('./controllers/contestController');
-const checkToken = require('./middlewares/checkToken');
-const upload = require('./utils/fileUpload');
+const basicMiddlewares = require('./../middlewares/basicMiddlewares');
+const contestController = require('./../controllers/contestController');
+const checkToken = require('./../middlewares/checkToken');
+const upload = require('./../utils/fileUpload');
 
 const contestRouter = Router();
 
 // router.post(
 //   '/getAllContests',
-contestRouter.get('/', checkToken.checkToken,
+contestRouter.get(
+  '/',
+  checkToken.checkToken,
   basicMiddlewares.onlyForCreative,
   contestController.getContests);
 
+// check update mw, controller
 // router.get(
 //   '/getContestById',
 contestRouter.get(

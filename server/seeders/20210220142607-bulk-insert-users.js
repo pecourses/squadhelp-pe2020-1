@@ -7,24 +7,28 @@ module.exports = {
       firstName: 'buyerf',
       lastName: 'buyerl',
       displayName: 'buyerdn',
-      password: hash('123456', CONSTANTS.SALT_ROUNDS),
+      password: await hash('123456', CONSTANTS.SALT_ROUNDS),
       email: 'qwertyb@qwerty.qwerty',
       avatar: 'anon.png',
-      role: 'customer',
+      role: CONSTANTS.CUSTOMER,
       balance: 100000,
     }, {
       firstName: 'creativef',
       lastName: 'creativel',
       displayName: 'creativedn',
-      password: hash('123456', CONSTANTS.SALT_ROUNDS),
+      password: await hash('123456', CONSTANTS.SALT_ROUNDS),
       email: 'qwertyc@qwerty.qwerty',
       avatar: 'anon.png',
-      role: 'creator',
+      role: CONSTANTS.CREATOR,
       balance: 100,
     }], {});
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('Users', null, {});
+    await queryInterface.bulkDelete('Users', {
+      email: {
+        [ Sequelize.Op.in]:['qwertyb@qwerty.qwerty', 'qwertyc@qwerty.qwerty'],
+      },
+    }, {});
   },
 };

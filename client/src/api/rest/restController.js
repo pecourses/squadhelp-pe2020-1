@@ -33,7 +33,7 @@ export const getCustomersContests = (data) => {
 
 // http://host:port/api/contests
 export const getActiveContests = ({offset, limit, typeIndex, contestId, industry, awardSort, ownEntries}) => {
-    return http.get('/contests', {offset, limit, typeIndex, contestId, industry, awardSort, ownEntries})
+    return http.post('/contests', {offset, limit, typeIndex, contestId, industry, awardSort, ownEntries})
 };
 
 //

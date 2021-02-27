@@ -17,8 +17,8 @@ const RegistrationPage = (props) => {
   };
 
   const faqArticles = (articles) => 
-    articles.map(a => 
-      <div>
+    articles.map((a, index) => 
+      <div key={index}>
         <div className={styles.headerArticle}>
           {a.header}
         </div>
@@ -55,7 +55,7 @@ const RegistrationPage = (props) => {
               send us a <span
               className={ styles.orangeSpan }>message</span>. For assistance
               with launching a contest,
-              you can also call us at (877) 355-3585 or schedule a <span
+              you can also call us at {CONSTANTS.CONTACT_US.PHONE} or schedule a <span
               className={ styles.orangeSpan }>Branding Consultation</span>
             </div>
           </div>

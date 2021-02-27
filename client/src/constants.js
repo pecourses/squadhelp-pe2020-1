@@ -4,6 +4,10 @@ const serverPort = env === 'production' ? 3000 : 9632;
 export default {
   CUSTOMER: 'customer',
   CREATOR: 'creator',
+  // SQUADHELP_PHONE: '(877)355-3585',
+  CONTACT_US: {
+    PHONE: '(877)355-3585',
+  },
   CONTEST_STATUS_ACTIVE: 'active',
   CONTEST_STATUS_FINISHED: 'finished',
   CONTEST_STATUS_PENDING: 'pending',

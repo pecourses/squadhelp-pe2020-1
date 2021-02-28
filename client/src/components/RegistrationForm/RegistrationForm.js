@@ -1,5 +1,4 @@
 import React from 'react';
-import Error from '../Error/Error';
 import { connect } from 'react-redux';
 import { authActionRegister, clearAuth } from '../../actions/actionCreator';
 import { Redirect } from 'react-router-dom';
@@ -12,6 +11,8 @@ import AgreeTermOfServiceInput
 import CONSTANTS from '../../constants';
 import customValidator from '../../validators/validator';
 import Schems from '../../validators/validationSchems';
+import Error from './../Error/Error';
+
 
 class RegistrationForm extends React.Component{
 
@@ -31,8 +32,8 @@ class RegistrationForm extends React.Component{
   };
 
   render () {
-    const {handleSubmit, submitting, auth, authClear} = this.props;
-    const {error} = auth;
+    const {handleSubmit, submitting, auth: {error}, authClear} = this.props;
+
     const formInputClasses = {
       container: styles.inputContainer,
       input: styles.input,
@@ -41,17 +42,20 @@ class RegistrationForm extends React.Component{
       valid: styles.valid,
     };
     return (
+     
       <div className={ styles.signUpFormContainer }>
-        { error && <Error data={ error.data } status={ error.status }
-                          clearError={ authClear }/> }
-        <div className={ styles.headerFormContainer }>
-          <h2>
-            CREATE AN ACCOUNT
-          </h2>
-          <h4>
-            We always keep your name and email address private.
-          </h4>
-        </div>
+          { error && <Error data={ error.data } status={ error.status }
+                            clearError={ authClear }/> }
+          <div className={ styles.headerFormContainer }>
+            <h2>
+              CREATE AN ACCOUNT
+            </h2>
+            <h4>
+              We always keep your name and email address private.
+            </h4>
+          </div>      
+         
+        
         <form onSubmit={ handleSubmit(this.clicked) }>
           <div className={ styles.row }>
             <Field
@@ -129,17 +133,18 @@ class RegistrationForm extends React.Component{
             <span className={ styles.inscription }>Create Account</span>
           </button>
         </form>
-      </div>
+
+       </div> 
     );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth,
     initialValues: {
       role: CONSTANTS.CUSTOMER,
     },
+    auth: state.auth
   };
 };
 
@@ -153,4 +158,7 @@ const mapDispatchToProps = (dispatch) => (
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
   form: 'login',
   validate: customValidator(Schems.RegistrationSchem),
+  // initialValues:{
+  //     role: CONSTANTS.CUSTOMER,
+  //   }
 })(RegistrationForm));

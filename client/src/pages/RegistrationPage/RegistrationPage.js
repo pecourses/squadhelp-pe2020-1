@@ -12,12 +12,9 @@ import FaqArticlesList from './FaqArticlesList'
 import Error from './../../components/Error/Error';
 
 const RegistrationPage = (props) => {
-  const {authClear, error} = props;
-  props.clearError();
-
-  const changeRoute = () => {
-    props.history.replace('/');
-  };
+  const {authClear, clearError, error} = props;
+  
+  clearError();
 
   const articlesListClasses = {
     articlesMainContainer: styles.articlesMainContainer,
@@ -48,7 +45,7 @@ const RegistrationPage = (props) => {
               We always keep your name and email address private.
             </h4>
           </div>      
-          <RegistrationForm changeRoute={ changeRoute }/>
+          <RegistrationForm/>
         </div>
       </div>
       <div className={ styles.footer }>

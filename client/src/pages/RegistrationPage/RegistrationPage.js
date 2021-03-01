@@ -9,10 +9,10 @@ import { clearErrorSignUpAndLogin, clearAuth } from '../../actions/actionCreator
 import CONSTANTS from '../../constants';
 import faq from './faq.json'
 import FaqArticlesList from './FaqArticlesList'
-// import Error from './../../components/Error/Error';
+import Error from './../../components/Error/Error';
 
 const RegistrationPage = (props) => {
-  //const {authClear, auth: { error }} = props;
+  const {authClear, error} = props;
   props.clearError();
 
   const changeRoute = () => {
@@ -37,7 +37,19 @@ const RegistrationPage = (props) => {
                   style={ {textDecoration: 'none'} }><span>Login</span></Link>
           </div>
         </div>
-        <RegistrationForm changeRoute={ changeRoute }/>
+        <div className={ styles.signUpFormContainer }>
+          { error && <Error data={ error.data } status={ error.status }
+                            clearError={ authClear }/> }
+          <div className={ styles.headerFormContainer }>
+            <h2>
+              CREATE AN ACCOUNT
+            </h2>
+            <h4>
+              We always keep your name and email address private.
+            </h4>
+          </div>      
+          <RegistrationForm changeRoute={ changeRoute }/>
+        </div>
       </div>
       <div className={ styles.footer }>
         <FaqArticlesList faq={faq} 
@@ -48,17 +60,13 @@ const RegistrationPage = (props) => {
   );
 };
 
-// const mapStateToProps = (state) => {
-//   return {
-//     auth: state.auth,
-//   };
-// };
+const mapStateToProps = ({auth}) => auth;
 
 const mapDispatchToProps = (dispatch) => {
   return {
     clearError: () => dispatch(clearErrorSignUpAndLogin()),
-//    authClear: () => dispatch(clearAuth()),
+    authClear: () => dispatch(clearAuth()),
   };
 };
 
-export default connect(null, mapDispatchToProps)(RegistrationPage);
+export default connect(mapStateToProps, mapDispatchToProps)(RegistrationPage);

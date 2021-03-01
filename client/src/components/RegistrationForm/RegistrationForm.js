@@ -11,7 +11,7 @@ import AgreeTermOfServiceInput
 import CONSTANTS from '../../constants';
 import customValidator from '../../validators/validator';
 import Schems from '../../validators/validationSchems';
-import Error from './../Error/Error';
+// import Error from './../Error/Error';
 
 
 class RegistrationForm extends React.Component{
@@ -20,7 +20,7 @@ class RegistrationForm extends React.Component{
     this.props.authClear();
   }
 
-  clicked = (values) => {
+  clickSubmit = (values) => {
     this.props.register({
       firstName: values.firstName,
       lastName: values.lastName,
@@ -32,8 +32,8 @@ class RegistrationForm extends React.Component{
   };
 
   render () {
-    const {handleSubmit, submitting, auth: {error}, authClear} = this.props;
-
+    const {handleSubmit, submitting, authClear} = this.props;
+    
     const formInputClasses = {
       container: styles.inputContainer,
       input: styles.input,
@@ -41,22 +41,9 @@ class RegistrationForm extends React.Component{
       notValid: styles.notValid,
       valid: styles.valid,
     };
-    return (
-     
-      <div className={ styles.signUpFormContainer }>
-          { error && <Error data={ error.data } status={ error.status }
-                            clearError={ authClear }/> }
-          <div className={ styles.headerFormContainer }>
-            <h2>
-              CREATE AN ACCOUNT
-            </h2>
-            <h4>
-              We always keep your name and email address private.
-            </h4>
-          </div>      
-         
-        
-        <form onSubmit={ handleSubmit(this.clicked) }>
+
+    return (        
+        <form onSubmit={ handleSubmit(this.clickSubmit) }>
           <div className={ styles.row }>
             <Field
               name='firstName'
@@ -126,27 +113,15 @@ class RegistrationForm extends React.Component{
               component={ AgreeTermOfServiceInput }
               type='checkbox'
             />
-
           </div>
           <button type='submit' disabled={ submitting }
                   className={ styles.submitContainer }>
             <span className={ styles.inscription }>Create Account</span>
           </button>
         </form>
-
-       </div> 
     );
   }
 }
-
-const mapStateToProps = (state) => {
-  return {
-    initialValues: {
-      role: CONSTANTS.CUSTOMER,
-    },
-    auth: state.auth
-  };
-};
 
 const mapDispatchToProps = (dispatch) => (
   {
@@ -155,10 +130,10 @@ const mapDispatchToProps = (dispatch) => (
   }
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
+export default connect(null, mapDispatchToProps)(reduxForm({
   form: 'login',
   validate: customValidator(Schems.RegistrationSchem),
-  // initialValues:{
-  //     role: CONSTANTS.CUSTOMER,
-  //   }
+  initialValues:{
+      role: CONSTANTS.CUSTOMER,
+    }
 })(RegistrationForm));

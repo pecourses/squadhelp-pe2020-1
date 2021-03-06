@@ -3,7 +3,7 @@ require('./dbMongo/mongoose');
 const controller = require('./socketInit');
 const app = require('./app');
 
-const PORT = process.env.PORT || 9632;
+const PORT = process.env.PORT || 3000;
 
 const server = http.createServer(app);
 server.listen(PORT,

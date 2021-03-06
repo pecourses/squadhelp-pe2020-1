@@ -137,6 +137,15 @@ module.exports.payment = async (req, res, next) => {
     },
     transaction);
 
+    // add info to Transactions
+    const { tokenData:{ userId } } = req;
+    const newExpense = {
+      type: false,
+      userId,
+      sum: price,
+    };
+    await bd.Transaction.create(newExpense, { transaction });
+
     const orderId = uuid();
 
     contests.forEach((contest, index) => {
@@ -152,7 +161,7 @@ module.exports.payment = async (req, res, next) => {
         prize,
       });
     });
-    await bd.Contests.bulkCreate(contests, transaction);
+    await bd.Contests.bulkCreate(contests, { transaction });
     await transaction.commit();
     res.send();
   } catch (err) {
@@ -211,6 +220,15 @@ module.exports.cashout = async (req, res, next) => {
       },
     },
     transaction);
+
+    const { tokenData:{ userId }, body:{ sum } } = req;
+    const newIncome = {
+      type: true,
+      userId,
+      sum,
+    };
+
+    await bd.Transaction.create(newIncome, { transaction });
     transaction.commit();
     res.send({ balance: updatedUser.balance });
   } catch (err) {

@@ -1,6 +1,6 @@
 const env = process.env.NODE_ENV || 'development';
 const serverIP = 'server-dev';
-const serverPort = env === 'production' ? 3000 : 3000;
+const serverPort = env === 'production' ? 5000 : 5000;
 export default {
   CUSTOMER: 'customer',
   CREATOR: 'creator',

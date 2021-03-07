@@ -436,3 +436,30 @@ export const changeModalShow=(data)=>{
         data: data
     }
 };
+
+export const getTransactionsAction = (data) => {
+    return{
+        type: ACTION.GET_TRANSACTIONS_ACTION,
+        data: data
+    }
+};
+
+export const getTransactionsRequest = (data) => {
+    return{
+        type: ACTION.GET_TRANSACTIONS_REQUEST
+    }
+};
+
+export const getTransactionsSuccess = (data) => {
+    return{
+        type: ACTION.GET_TRANSACTIONS_SUCCESS,
+        data: data
+    }
+};
+
+export const getTransactionsError = (error) => {
+    return{
+        type: ACTION.GET_TRANSACTIONS_ERROR,
+        data: error
+    }
+};

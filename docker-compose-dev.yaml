@@ -7,8 +7,8 @@ services:
       dockerfile: Dockerfile-dev
     environment:
       NODE_ENV: development
-    stdin_open: true
-    tty: true    
+    # stdin_open: true
+    # tty: true    
     depends_on:
       - server-dev
     volumes:
@@ -33,7 +33,6 @@ services:
       - ./server:/server
       - /server/node_modules
 
-
   mongo-db-dev:
     image: mongo:3.6
     #     environment:
@@ -41,8 +40,6 @@ services:
     #      - MONGO_INITDB_ROOT_PASSWORD=password
     ports:
       - "27017:27017"
-
-
 
   postgres-db-dev:
     image: postgres:13

@@ -11,7 +11,7 @@ import getContestByIdReducer from './getContestByIdReducer';
 import updateContestReducer from './updateContestReducer';
 import chatReducer from './chatReducer';
 import userProfileReducer from './userProfileReducer';
-
+import transactionsReducer from './transactionsReducer'
 
 
 const rootReducer=combineReducers({
@@ -26,7 +26,8 @@ const rootReducer=combineReducers({
    bundleStore: bundleReducer,
    updateContestStore: updateContestReducer,
    chatStore: chatReducer,
-   userProfile: userProfileReducer
+   userProfile: userProfileReducer,
+   transaction: transactionsReducer
 });
 
 export default rootReducer;

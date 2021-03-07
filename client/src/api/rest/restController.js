@@ -50,3 +50,5 @@ export const getContestById = ({contestId}) => {
 // view - actionCreator(action) -> rootSaga -> itemSaga -> api
 
 export const updateContest = data => http.put(`/contests/${data.contestId}`, data);
+
+export const getTransactions = data => http.get(`/users/transactions?offset=${data.offset}&limit=${data.limit}`);

@@ -9,6 +9,7 @@ const chatController = require('./controllers/chatController');
 const upload = require('./utils/fileUpload');
 const router = Router();
 const contestRouter = require('./routers/contestRouter');
+const userRouter = require('./routers/userRouter');
 
 // authRouter
 
@@ -33,6 +34,8 @@ router.post(
 // contestRouter
 // /api/contests
 router.use('/contests', contestRouter);
+
+router.use('/users', userRouter);
 
 router.post(
   '/dataForContest',
